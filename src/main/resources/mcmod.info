@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "modid": "hekacraft",
+  "name": "HekaCraft",
+  "description": "Egyptian-themed Minecraft mod",
+  "version": "0.1",
+  "mcversion": "10.13.4.1558-1.7.10",
+  "url": "https://github.com/woggy/HekaCraft",
+  "updateUrl": "https://github.com/woggy/HekaCraft/releases",
+  "authorList": ["woggy"],
+  "credits": "woggy, kiya",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
