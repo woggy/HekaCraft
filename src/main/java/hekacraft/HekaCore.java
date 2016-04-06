@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-//import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -36,7 +36,7 @@ public class HekaCore
     	}
     };
     
-    //ArmorEventHandler soakDamage = new ArmorEventHandler();
+    ArmorEventHandler soakDamage = new ArmorEventHandler();
     
     public static Item pesheskef;
 	public static HashMap<String, Scarab> scarabHash;
@@ -66,7 +66,7 @@ public class HekaCore
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-    	//MinecraftForge.EVENT_BUS.register(soakDamage);
+    	MinecraftForge.EVENT_BUS.register(soakDamage);
     	
     	pesheskef = new Pesheskef();
     	GameRegistry.registerItem(pesheskef, "Pesheskef");

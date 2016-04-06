@@ -8,28 +8,33 @@ import net.minecraft.item.ItemStack;
 
 public class ScarabNeck extends Item implements IBauble 
 {
-	//private static int armor_value;
+	private int armorValue;
 	
 	public ScarabNeck(String materialName)
 	{
 		this.setMaxStackSize(1);
 		this.setCreativeTab(HekaCore.creativeTab);
 		this.setUnlocalizedName(materialName+"ScarabNeck");
-		this.setTextureName("hekacraft:"+materialName+"ScarabNeck");
+		this.setTextureName("hekacraft:hekacraft.necklace.scarab."+materialName);
 		
-//		switch(materialName)
-//		{
-//		case "faience": armor_value = 1; 
-//						break;
-//		case "lapis":	armor_value = 2;
-//						break;
-//		case "emerald":	armor_value = 3;
-//						break;
-//		case "diamond":	armor_value = 4;
-//						break;
-//		default:		armor_value = 0;
-//						break;
-//		}
+		switch(materialName)
+		{
+		case "faience": armorValue = 1;
+						break;
+		case "lapis":	armorValue = 2;
+						break;
+		case "emerald":	armorValue = 3;
+						break;
+		case "diamond":	armorValue = 4;
+						break;
+		default:		armorValue = 0;
+						break;
+		}
+	}
+	
+	public int getArmorValue()
+	{
+		return armorValue;
 	}
 	
 	public BaubleType getBaubleType(ItemStack itemstack)
