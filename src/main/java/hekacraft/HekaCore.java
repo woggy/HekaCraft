@@ -39,27 +39,25 @@ public class HekaCore
     ArmorEventHandler soakDamage = new ArmorEventHandler();
     
     public static Item pesheskef;
+    public static Item palette;
+    public static Item chisel;
 	public static HashMap<String, Scarab> scarabHash;
 	public static HashMap<String, ScarabNeck> scarabNeckHash;
 	public enum ScarabType
 	{
-		FAIENCE ("faience", Items.clay_ball, Item.getItemFromBlock(Blocks.glass_pane), 0),
-		LAPIS	("lapis", Item.getItemFromBlock(Blocks.glass_pane), Items.dye, 2),
-		EMERALD ("emerald", Items.dye, Items.emerald, 1),
-		DIAMOND ("diamond", Items.emerald, Items.diamond, 0);
+		FAIENCE ("faience", new ItemStack(Items.clay_ball), new ItemStack(Item.getItemFromBlock(Blocks.glass_pane))),
+		LAPIS	("lapis", new ItemStack(Item.getItemFromBlock(Blocks.glass_pane)), new ItemStack(Items.dye,1,4)),
+		EMERALD ("emerald", new ItemStack(Items.dye,1,4), new ItemStack(Items.emerald)),
+		DIAMOND ("diamond", new ItemStack(Items.emerald), new ItemStack(Items.diamond));
 		
 		private final String materialName;
 		private final ItemStack edgeItem;
 		private final ItemStack centerItem;
-		ScarabType(String materialName, Item edgeItem, Item centerItem, int lapisPointer)
+		ScarabType(String materialName, ItemStack edgeItem, ItemStack centerItem)
 		{
 			this.materialName = materialName;
-			this.edgeItem = new ItemStack(edgeItem);
-			if (lapisPointer == 1)
-				this.edgeItem.setItemDamage(4);
-			this.centerItem = new ItemStack(centerItem);
-			if (lapisPointer == 2)
-				this.centerItem.setItemDamage(4);
+			this.edgeItem = edgeItem;
+			this.centerItem = centerItem;
 		}
 	}
 
@@ -70,6 +68,11 @@ public class HekaCore
     	
     	pesheskef = new Pesheskef();
     	GameRegistry.registerItem(pesheskef, "Pesheskef");
+    	palette = new Palette();
+    	GameRegistry.registerItem(palette, "ScribePalette");
+    	chisel = new Chisel();
+    	GameRegistry.registerItem(chisel, "Chisel");
+    	
 
     	scarabHash = new HashMap<String, Scarab>();
     	scarabNeckHash = new HashMap<String, ScarabNeck>();
@@ -87,6 +90,26 @@ public class HekaCore
     public void load(FMLInitializationEvent event)
     {
     	GameRegistry.addRecipe(new ItemStack(pesheskef), "fff", " f ", 'f', new ItemStack(Items.flint));
+    	
+    	GameRegistry.addRecipe(new ItemStack(palette), "xrw", "ccc", "ygl",
+    													'x', new ItemStack(Items.coal),
+    													'r', new ItemStack(Items.dye,1,1),
+    													'w', new ItemStack(Items.egg),
+    													'c', new ItemStack(Items.clay_ball),
+    													'y', new ItemStack(Items.dye,1,11),
+    													'g', new ItemStack(Items.dye,1,2),
+    													'l', new ItemStack(Items.dye,1,4));
+    	GameRegistry.addRecipe(new ItemStack(palette), "xrw", "ccc", "ygl",
+														'x', new ItemStack(Items.coal,1,1),
+    													'r', new ItemStack(Items.dye,1,1),
+    													'w', new ItemStack(Items.egg),
+    													'c', new ItemStack(Items.clay_ball),
+    													'y', new ItemStack(Items.dye,1,11),
+    													'g', new ItemStack(Items.dye,1,2),
+    													'l', new ItemStack(Items.dye,1,4));
+    	
+    	GameRegistry.addRecipe(new ItemStack(chisel), "x ", " y", 'x', new ItemStack(Items.iron_ingot), 'y', new ItemStack(Items.stick));
+    	
     	for (ScarabType scarab : ScarabType.values())
     	{
     		GameRegistry.addRecipe(new ItemStack(scarabHash.get(scarab.materialName)), " n ", "ece", "e e", 'n', new ItemStack(Items.gold_nugget), 'e', scarab.edgeItem, 'c', scarab.centerItem);

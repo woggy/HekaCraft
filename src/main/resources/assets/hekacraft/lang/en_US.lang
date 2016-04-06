@@ -1,4 +1,7 @@
 item.pesheskef.name=Pesheskef
+item.palette.name=Scribe's Palette
+item.chisel.name=Stonecarver's Chisel
+
 item.faienceScarab.name=Faience Scarab
 item.lapisScarab.name=Lapis Scarab
 item.emeraldScarab.name=Emerald Scarab
@@ -8,4 +11,4 @@ item.lapisScarabNeck.name=Lapis Scarab Necklace
 item.emeraldScarabNeck.name=Emerald Scarab Necklace
 item.diamondScarabNeck.name=Diamond Scarab Necklace
 
-itemGroup.HekaCraft.name=HekaCraft
+itemGroup.HekaCraft=HekaCraft

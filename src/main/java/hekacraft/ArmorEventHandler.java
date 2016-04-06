@@ -12,7 +12,7 @@ public class ArmorEventHandler
 	@SubscribeEvent
 	public void soakDamage(LivingHurtEvent event)
 	{
-		System.out.println("Took " + event.ammount + " damage from " + event.source);
+		//System.out.println("Took " + event.ammount + " damage from " + event.source);
 		if (event.entity instanceof EntityPlayer)
 		{
 			IInventory baubles = BaublesApi.getBaubles((EntityPlayer) event.entity);
@@ -23,7 +23,7 @@ public class ArmorEventHandler
 					if (possibauble.getItem() instanceof ScarabNeck)
 					{
 						int soakValue = ((ScarabNeck) possibauble.getItem()).getArmorValue(); 
-						System.out.println("Wearing a " + possibauble.getItem().getUnlocalizedName() + " necklace! Damage reduced by " + soakValue);
+						//System.out.println("Wearing a " + possibauble.getItem().getUnlocalizedName() + " necklace! Damage reduced by " + soakValue);
 						event.ammount -= soakValue;
 					}
 			}
