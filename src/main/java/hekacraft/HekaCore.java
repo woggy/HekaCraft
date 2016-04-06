@@ -5,7 +5,7 @@ import java.util.HashMap;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
@@ -14,6 +14,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 
@@ -60,11 +61,15 @@ public class HekaCore
 			this.centerItem = centerItem;
 		}
 	}
+	
+	public static Item itemMageTable;
+	public static Block blockMageTable;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
     	MinecraftForge.EVENT_BUS.register(soakDamage);
+    	NetworkRegistry.INSTANCE.registerGuiHandler(HekaCore.instance, new GuiHandler());
     	
     	pesheskef = new Pesheskef();
     	GameRegistry.registerItem(pesheskef, "Pesheskef");
@@ -83,7 +88,11 @@ public class HekaCore
     		GameRegistry.registerItem(scarabHash.get(scarab.materialName),scarab.materialName+"Scarab");
     		GameRegistry.registerItem(scarabNeckHash.get(scarab.materialName), scarab.materialName+"ScarabNeck");
     	}
-    	
+
+    	itemMageTable = new ItemMageTable();
+    	GameRegistry.registerItem(itemMageTable, "ItemMageTable"); 	
+    	blockMageTable = new BlockMageTable();
+    	GameRegistry.registerBlock(blockMageTable, "BlockMageTable"); 	
     }
     
     @EventHandler
@@ -110,10 +119,16 @@ public class HekaCore
     	
     	GameRegistry.addRecipe(new ItemStack(chisel), "x ", " y", 'x', new ItemStack(Items.iron_ingot), 'y', new ItemStack(Items.stick));
     	
+    	GameRegistry.addRecipe(new ItemStack(itemMageTable), "fbp", "www", 
+    													'f', new ItemStack(pesheskef),
+    													'b', new ItemStack(Items.bowl),
+    													'p', new ItemStack(palette),
+    													'w', new ItemStack(Blocks.planks,1,4));	//Acacia
+    	
     	for (ScarabType scarab : ScarabType.values())
     	{
-    		GameRegistry.addRecipe(new ItemStack(scarabHash.get(scarab.materialName)), " n ", "ece", "e e", 'n', new ItemStack(Items.gold_nugget), 'e', scarab.edgeItem, 'c', scarab.centerItem);
-    		GameRegistry.addRecipe(new ItemStack(scarabNeckHash.get(scarab.materialName)), "xyx", "y y", "xyx", 'x', new ItemStack(scarabHash.get(scarab.materialName)), 'y', new ItemStack(Items.string));
+    		MageTableCraftingManager.getInstance().addRecipe(new ItemStack(scarabHash.get(scarab.materialName)), " n ", "ece", "e e", 'n', new ItemStack(Items.gold_nugget), 'e', scarab.edgeItem, 'c', scarab.centerItem);
+    		MageTableCraftingManager.getInstance().addRecipe(new ItemStack(scarabNeckHash.get(scarab.materialName)), "xyx", "y y", "xyx", 'x', new ItemStack(scarabHash.get(scarab.materialName)), 'y', new ItemStack(Items.string));
     	}
     }
     

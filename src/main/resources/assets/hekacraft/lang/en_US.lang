@@ -11,4 +11,7 @@ item.lapisScarabNeck.name=Lapis Scarab Necklace
 item.emeraldScarabNeck.name=Emerald Scarab Necklace
 item.diamondScarabNeck.name=Diamond Scarab Necklace
 
+item.itemMageTable.name=Magician's Worktable
+tile.blockMageTable.name=Magician's Worktable
+
 itemGroup.HekaCraft=HekaCraft
