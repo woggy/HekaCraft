@@ -10,6 +10,6 @@ public class Pesheskef extends ItemShears
 		this.setMaxDamage(50);
 		this.setCreativeTab(HekaCore.creativeTab);
 		this.setUnlocalizedName("pesheskef");
-		this.setTextureName("hekacraft:pesheskef");
+		this.setTextureName("hekacraft:hekacraft.tool.pesheskef");
 	}
 }
