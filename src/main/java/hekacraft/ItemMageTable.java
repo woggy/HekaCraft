@@ -67,7 +67,7 @@ public class ItemMageTable extends Item
 
                     if (p_77648_3_.getBlock(p_77648_4_, p_77648_5_, p_77648_6_) == blocktable)
                     {
-                    	p_77648_3_.setBlock(p_77648_4_ + b0, p_77648_5_, p_77648_6_ + b1, blocktable, i1 + 8, 3);
+                    	p_77648_3_.setBlock(p_77648_4_ + b0, p_77648_5_, p_77648_6_ + b1, HekaCore.blockMageTableDummy, i1, 3);
                     }
 
                     --p_77648_1_.stackSize;

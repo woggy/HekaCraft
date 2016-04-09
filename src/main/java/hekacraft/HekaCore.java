@@ -2,6 +2,7 @@ package hekacraft;
 
 import java.util.HashMap;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -64,6 +65,7 @@ public class HekaCore
 	
 	public static Item itemMageTable;
 	public static Block blockMageTable;
+	public static Block blockMageTableDummy;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -90,9 +92,11 @@ public class HekaCore
     	}
 
     	itemMageTable = new ItemMageTable();
-    	GameRegistry.registerItem(itemMageTable, "ItemMageTable"); 	
+    	GameRegistry.registerItem(itemMageTable, "ItemMageTable");
     	blockMageTable = new BlockMageTable();
-    	GameRegistry.registerBlock(blockMageTable, "BlockMageTable"); 	
+    	GameRegistry.registerBlock(blockMageTable, "BlockMageTable");
+    	blockMageTableDummy = new BlockMageTableDummy();
+    	GameRegistry.registerBlock(blockMageTableDummy, "BlockMageTableDummy"); 	
     }
     
     @EventHandler
@@ -123,7 +127,9 @@ public class HekaCore
     													'f', new ItemStack(pesheskef),
     													'b', new ItemStack(Items.bowl),
     													'p', new ItemStack(palette),
-    													'w', new ItemStack(Blocks.planks,1,4));	//Acacia
+    													'w', new ItemStack(Blocks.planks));
+    	ClientRegistry.bindTileEntitySpecialRenderer(MageTableTileEntity.class, new MageTableRenderer());
+    	GameRegistry.registerTileEntity(MageTableTileEntity.class, "mageTableTileEntity");
     	
     	for (ScarabType scarab : ScarabType.values())
     	{
