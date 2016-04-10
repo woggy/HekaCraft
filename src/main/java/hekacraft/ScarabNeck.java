@@ -17,18 +17,25 @@ public class ScarabNeck extends Item implements IBauble
 		this.setUnlocalizedName(materialName+"ScarabNeck");
 		this.setTextureName("hekacraft:hekacraft.necklace.scarab."+materialName);
 		
-		switch(materialName)
+		if(materialName == "faience")
 		{
-		case "faience": armorValue = 1;
-						break;
-		case "lapis":	armorValue = 2;
-						break;
-		case "emerald":	armorValue = 3;
-						break;
-		case "diamond":	armorValue = 4;
-						break;
-		default:		armorValue = 0;
-						break;
+			armorValue = 1;
+		}
+		else if(materialName == "lapis")
+		{
+			armorValue = 2;
+		}
+		else if(materialName == "emerald")
+		{
+			armorValue = 3;
+		}
+		else if(materialName == "diamond")
+		{
+			armorValue = 4;
+		}
+		else
+		{
+			armorValue = 0;
 		}
 	}
 	

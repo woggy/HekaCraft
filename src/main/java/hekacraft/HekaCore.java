@@ -23,8 +23,8 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 public class HekaCore
 {
     public static final String MODID = "hekacraft";
-    public static final String MODNAME = "HekaCraft";
-    public static final String VERSION = "0.1";
+    public static final String MODNAME = "@NAME@";
+    public static final String VERSION = "@VERSION@";
     
     @Instance(value = HekaCore.MODID)
     public static HekaCore instance;
