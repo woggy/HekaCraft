@@ -14,6 +14,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -47,15 +49,15 @@ public class HekaCore
 	public static HashMap<String, ScarabNeck> scarabNeckHash;
 	public enum ScarabType
 	{
-		FAIENCE ("faience", new ItemStack(Items.clay_ball), new ItemStack(Item.getItemFromBlock(Blocks.glass_pane))),
-		LAPIS	("lapis", new ItemStack(Item.getItemFromBlock(Blocks.glass_pane)), new ItemStack(Items.dye,1,4)),
-		EMERALD ("emerald", new ItemStack(Items.dye,1,4), new ItemStack(Items.emerald)),
-		DIAMOND ("diamond", new ItemStack(Items.emerald), new ItemStack(Items.diamond));
+		FAIENCE ("faience", "clay", "paneGlass"),
+		LAPIS	("lapis", "paneGlass", "dyeBlue"),
+		EMERALD ("emerald", "dyeBlue", "gemEmerald"),
+		DIAMOND ("diamond", "gemEmerald", "gemDiamond");
 		
 		private final String materialName;
-		private final ItemStack edgeItem;
-		private final ItemStack centerItem;
-		ScarabType(String materialName, ItemStack edgeItem, ItemStack centerItem)
+		private final String edgeItem;
+		private final String centerItem;
+		ScarabType(String materialName, String edgeItem, String centerItem)
 		{
 			this.materialName = materialName;
 			this.edgeItem = edgeItem;
@@ -102,39 +104,35 @@ public class HekaCore
     @EventHandler
     public void load(FMLInitializationEvent event)
     {
+    	//Forge doesn't have this registered, despite being a vanilla item. Done here so that ScarabType can pass consistent strings.
+    	OreDictionary.registerOre("clay", Items.clay_ball);
+    	
     	GameRegistry.addRecipe(new ItemStack(pesheskef), "fff", " f ", 'f', new ItemStack(Items.flint));
     	
-    	GameRegistry.addRecipe(new ItemStack(palette), "xrw", "ccc", "ygl",
-    													'x', new ItemStack(Items.coal),
-    													'r', new ItemStack(Items.dye,1,1),
+    	//Wildcard usage allows this to pick up both coal and charcoal.
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(palette), "xrw", "ccc", "ygl",
+    													'x', new ItemStack(Items.coal,1,OreDictionary.WILDCARD_VALUE),
+    													'r', "dyeRed",
     													'w', new ItemStack(Items.egg),
-    													'c', new ItemStack(Items.clay_ball),
-    													'y', new ItemStack(Items.dye,1,11),
-    													'g', new ItemStack(Items.dye,1,2),
-    													'l', new ItemStack(Items.dye,1,4));
-    	GameRegistry.addRecipe(new ItemStack(palette), "xrw", "ccc", "ygl",
-														'x', new ItemStack(Items.coal,1,1),
-    													'r', new ItemStack(Items.dye,1,1),
-    													'w', new ItemStack(Items.egg),
-    													'c', new ItemStack(Items.clay_ball),
-    													'y', new ItemStack(Items.dye,1,11),
-    													'g', new ItemStack(Items.dye,1,2),
-    													'l', new ItemStack(Items.dye,1,4));
+    													'c', "clay",
+    													'y', "dyeYellow",
+    													'g', "dyeGreen",
+    													'l', "dyeBlue"));
+
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(chisel), "x ", " y", 'x', "ingotIron", 'y', "stickWood"));
     	
-    	GameRegistry.addRecipe(new ItemStack(chisel), "x ", " y", 'x', new ItemStack(Items.iron_ingot), 'y', new ItemStack(Items.stick));
-    	
-    	GameRegistry.addRecipe(new ItemStack(itemMageTable), "fbp", "www", 
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(itemMageTable), "fbp", "www", 
     													'f', new ItemStack(pesheskef),
     													'b', new ItemStack(Items.bowl),
     													'p', new ItemStack(palette),
-    													'w', new ItemStack(Blocks.planks));
+    													'w', "plankWood"));
     	ClientRegistry.bindTileEntitySpecialRenderer(MageTableTileEntity.class, new MageTableRenderer());
     	GameRegistry.registerTileEntity(MageTableTileEntity.class, "mageTableTileEntity");
     	
     	for (ScarabType scarab : ScarabType.values())
     	{
-    		MageTableCraftingManager.getInstance().addRecipe(new ItemStack(scarabHash.get(scarab.materialName)), " n ", "ece", "e e", 'n', new ItemStack(Items.gold_nugget), 'e', scarab.edgeItem, 'c', scarab.centerItem);
-    		MageTableCraftingManager.getInstance().addRecipe(new ItemStack(scarabNeckHash.get(scarab.materialName)), "xyx", "y y", "xyx", 'x', new ItemStack(scarabHash.get(scarab.materialName)), 'y', new ItemStack(Items.string));
+    		MageTableCraftingManager.getInstance().addRecipe(new ShapedOreRecipe(new ItemStack(scarabHash.get(scarab.materialName)), " n ", "ece", "e e", 'n', "nuggetGold", 'e', scarab.edgeItem, 'c', scarab.centerItem));
+    		MageTableCraftingManager.getInstance().addRecipe(new ShapedOreRecipe(new ItemStack(scarabNeckHash.get(scarab.materialName)), "xyx", "y y", "xyx", 'x', new ItemStack(scarabHash.get(scarab.materialName)), 'y', new ItemStack(Items.string)));
     	}
     }
     

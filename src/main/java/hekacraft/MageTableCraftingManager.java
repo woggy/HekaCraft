@@ -46,6 +46,11 @@ public class MageTableCraftingManager
             }
         });
     }
+    
+    public void addRecipe(IRecipe recipe)
+    {
+        this.getRecipeList().add(recipe);
+    }
 
     public ShapedRecipes addRecipe(ItemStack p_92103_1_, Object ... p_92103_2_)
     {
@@ -155,60 +160,17 @@ public class MageTableCraftingManager
 
     public ItemStack findMatchingRecipe(InventoryCrafting p_82787_1_, World p_82787_2_)
     {
-        int i = 0;
-        ItemStack itemstack = null;
-        ItemStack itemstack1 = null;
-        int j;
-
-        for (j = 0; j < p_82787_1_.getSizeInventory(); ++j)
+        for (int j = 0; j < this.recipes.size(); ++j)
         {
-            ItemStack itemstack2 = p_82787_1_.getStackInSlot(j);
+            IRecipe irecipe = (IRecipe)this.recipes.get(j);
 
-            if (itemstack2 != null)
+            if (irecipe.matches(p_82787_1_, p_82787_2_))
             {
-                if (i == 0)
-                {
-                    itemstack = itemstack2;
-                }
-
-                if (i == 1)
-                {
-                    itemstack1 = itemstack2;
-                }
-
-                ++i;
+                return irecipe.getCraftingResult(p_82787_1_);
             }
         }
 
-        if (i == 2 && itemstack.getItem() == itemstack1.getItem() && itemstack.stackSize == 1 && itemstack1.stackSize == 1 && itemstack.getItem().isRepairable())
-        {
-            Item item = itemstack.getItem();
-            int j1 = item.getMaxDamage() - itemstack.getItemDamageForDisplay();
-            int k = item.getMaxDamage() - itemstack1.getItemDamageForDisplay();
-            int l = j1 + k + item.getMaxDamage() * 5 / 100;
-            int i1 = item.getMaxDamage() - l;
-
-            if (i1 < 0)
-            {
-                i1 = 0;
-            }
-
-            return new ItemStack(itemstack.getItem(), 1, i1);
-        }
-        else
-        {
-            for (j = 0; j < this.recipes.size(); ++j)
-            {
-                IRecipe irecipe = (IRecipe)this.recipes.get(j);
-
-                if (irecipe.matches(p_82787_1_, p_82787_2_))
-                {
-                    return irecipe.getCraftingResult(p_82787_1_);
-                }
-            }
-
-            return null;
-        }
+        return null;
     }
 
     /**
