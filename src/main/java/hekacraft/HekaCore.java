@@ -69,12 +69,47 @@ public class HekaCore
 	public static Block blockMageTable;
 	public static Block blockMageTableDummy;
 
+	public static Item itemMalachite;
+	public static Block oreMalachite;
+	public static Block blockMalachite;
+	public static Item ingotCopper;
+	public static Block oreCopper;
+	public static Block blockCopper;
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+    }
+    
+    @EventHandler
+    public void load(FMLInitializationEvent event)
+    {
+    	this.eventAndGuiRegistration();
+    	this.tileEntityRegistration();
+    	this.itemAndBlockRegistration();
+    	this.oreRegistration();
+    	this.addRecipes();
+    }
+    
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event)
+    {
+    }
+    
+    public void eventAndGuiRegistration()
+    {
     	MinecraftForge.EVENT_BUS.register(soakDamage);
     	NetworkRegistry.INSTANCE.registerGuiHandler(HekaCore.instance, new GuiHandler());
-    	
+    }
+    
+    public void tileEntityRegistration()
+    {
+    	ClientRegistry.bindTileEntitySpecialRenderer(MageTableTileEntity.class, new MageTableRenderer());
+    	GameRegistry.registerTileEntity(MageTableTileEntity.class, "mageTableTileEntity");
+    }
+    
+    public void itemAndBlockRegistration()
+    {
     	pesheskef = new Pesheskef();
     	GameRegistry.registerItem(pesheskef, "Pesheskef");
     	palette = new Palette();
@@ -98,15 +133,32 @@ public class HekaCore
     	blockMageTable = new BlockMageTable();
     	GameRegistry.registerBlock(blockMageTable, "BlockMageTable");
     	blockMageTableDummy = new BlockMageTableDummy();
-    	GameRegistry.registerBlock(blockMageTableDummy, "BlockMageTableDummy"); 	
+    	GameRegistry.registerBlock(blockMageTableDummy, "BlockMageTableDummy");
+    	
+    	itemMalachite = new ItemMalachite();
+    	GameRegistry.registerItem(itemMalachite, "ItemMalachite");
+    	oreMalachite = new BlockMalachite(true);
+    	GameRegistry.registerBlock(oreMalachite, "OreMalachite");
+    	blockMalachite = new BlockMalachite(false);
+    	GameRegistry.registerBlock(blockMalachite, "BlockMalachite");
+    	ingotCopper = new IngotCopper();
+    	GameRegistry.registerItem(ingotCopper, "IngotCopper");
+    	oreCopper = new BlockCopper(true);
+    	GameRegistry.registerBlock(oreCopper, "OreCopper");
+    	blockCopper = new BlockCopper(false);
+    	GameRegistry.registerBlock(blockCopper, "BlockCopper");
     }
     
-    @EventHandler
-    public void load(FMLInitializationEvent event)
+    public void oreRegistration()
     {
-    	//Forge doesn't have this registered, despite being a vanilla item. Done here so that ScarabType can pass consistent strings.
+    	//Forge doesn't have clay registered, despite being a vanilla item. Done here so that ScarabType can always pass strings.
     	OreDictionary.registerOre("clay", Items.clay_ball);
-    	
+    	OreDictionary.registerOre("ingotCopper", ingotCopper);
+    	OreDictionary.registerOre("oreCopper", oreCopper);
+    }
+    
+    public void addRecipes()
+    {
     	GameRegistry.addRecipe(new ItemStack(pesheskef), "fff", " f ", 'f', new ItemStack(Items.flint));
     	
     	//Wildcard usage allows this to pick up both coal and charcoal.
@@ -126,18 +178,17 @@ public class HekaCore
     													'b', new ItemStack(Items.bowl),
     													'p', new ItemStack(palette),
     													'w', "plankWood"));
-    	ClientRegistry.bindTileEntitySpecialRenderer(MageTableTileEntity.class, new MageTableRenderer());
-    	GameRegistry.registerTileEntity(MageTableTileEntity.class, "mageTableTileEntity");
     	
     	for (ScarabType scarab : ScarabType.values())
     	{
     		MageTableCraftingManager.getInstance().addRecipe(new ShapedOreRecipe(new ItemStack(scarabHash.get(scarab.materialName)), " n ", "ece", "e e", 'n', "nuggetGold", 'e', scarab.edgeItem, 'c', scarab.centerItem));
     		MageTableCraftingManager.getInstance().addRecipe(new ShapedOreRecipe(new ItemStack(scarabNeckHash.get(scarab.materialName)), "xyx", "y y", "xyx", 'x', new ItemStack(scarabHash.get(scarab.materialName)), 'y', new ItemStack(Items.string)));
     	}
-    }
-    
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
+    	
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blockMalachite), "bbb", "bbb", "bbb", 'b', new ItemStack(itemMalachite)));
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(itemMalachite,9), "b", 'b', new ItemStack(blockMalachite)));
+    	GameRegistry.addSmelting(new ItemStack(oreCopper), new ItemStack(ingotCopper), 0.5f);
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blockCopper), "bbb", "bbb", "bbb", 'b', "ingotCopper"));
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ingotCopper,9), "b", 'b', new ItemStack(blockCopper)));
     }
 }

@@ -14,4 +14,11 @@ item.diamondScarabNeck.name=Diamond Scarab Necklace
 item.itemMageTable.name=Magician's Worktable
 tile.blockMageTable.name=Magician's Worktable
 
+item.malachite.name=Malachite
+tile.malachiteOre.name=Malachite Ore
+tile.malachiteBlock.name=Block of Malachite
+item.copper.name=Copper Ingot
+tile.copperOre.name=Copper Ore
+tile.copperBlock.name=Block of Copper
+
 itemGroup.HekaCraft=HekaCraft
