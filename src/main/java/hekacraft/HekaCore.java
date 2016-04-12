@@ -87,6 +87,7 @@ public class HekaCore
     	this.eventAndGuiRegistration();
     	this.tileEntityRegistration();
     	this.itemAndBlockRegistration();
+    	this.oreGeneration();
     	this.oreRegistration();
     	this.addRecipes();
     }
@@ -155,6 +156,12 @@ public class HekaCore
     	OreDictionary.registerOre("clay", Items.clay_ball);
     	OreDictionary.registerOre("ingotCopper", ingotCopper);
     	OreDictionary.registerOre("oreCopper", oreCopper);
+    }
+    
+    public void oreGeneration()
+    {
+    	//The second parameter here is a priority marker - but i have no idea what sorts of numbers other mods use.
+    	GameRegistry.registerWorldGenerator(new OreSpawning(), 1);
     }
     
     public void addRecipes()
