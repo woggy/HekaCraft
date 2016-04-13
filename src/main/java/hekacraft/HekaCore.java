@@ -41,6 +41,7 @@ public class HekaCore
     };
     
     ArmorEventHandler soakDamage = new ArmorEventHandler();
+    TerrainEventHandler decorateIncense = new TerrainEventHandler();
     
     public static Item pesheskef;
     public static Item palette;
@@ -75,6 +76,10 @@ public class HekaCore
 	public static Item ingotCopper;
 	public static Block oreCopper;
 	public static Block blockCopper;
+	
+	public static Item seedsIncense;
+	public static Item fruitIncense;
+	public static Block plantIncense;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -100,6 +105,7 @@ public class HekaCore
     public void eventAndGuiRegistration()
     {
     	MinecraftForge.EVENT_BUS.register(soakDamage);
+    	MinecraftForge.EVENT_BUS.register(decorateIncense);
     	NetworkRegistry.INSTANCE.registerGuiHandler(HekaCore.instance, new GuiHandler());
     }
     
@@ -148,6 +154,13 @@ public class HekaCore
     	GameRegistry.registerBlock(oreCopper, "OreCopper");
     	blockCopper = new BlockCopper(false);
     	GameRegistry.registerBlock(blockCopper, "BlockCopper");
+    	
+    	plantIncense = new CropIncense();
+    	GameRegistry.registerBlock(plantIncense, "PlantIncense");
+    	fruitIncense = new FruitIncense();
+    	GameRegistry.registerItem(fruitIncense, "FruitIncense");
+    	seedsIncense = new SeedsIncense(plantIncense, Blocks.sand);
+    	GameRegistry.registerItem(seedsIncense, "SeedsIncense");
     }
     
     public void oreRegistration()

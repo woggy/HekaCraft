@@ -21,4 +21,8 @@ item.copper.name=Copper Ingot
 tile.copperOre.name=Copper Ore
 tile.copperBlock.name=Block of Copper
 
+item.seedsIncense.name=Myrrh Clipping
+item.fruitIncense.name=Myrrh Resin
+tile.plantIncense.name=Myrrh Bush
+
 itemGroup.HekaCraft=HekaCraft
