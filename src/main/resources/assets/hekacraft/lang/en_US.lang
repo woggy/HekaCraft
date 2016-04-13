@@ -17,6 +17,7 @@ tile.blockMageTable.name=Magician's Worktable
 item.malachite.name=Malachite
 tile.malachiteOre.name=Malachite Ore
 tile.malachiteBlock.name=Block of Malachite
+item.copperNugget.name=Copper Nugget
 item.copper.name=Copper Ingot
 tile.copperOre.name=Copper Ore
 tile.copperBlock.name=Block of Copper

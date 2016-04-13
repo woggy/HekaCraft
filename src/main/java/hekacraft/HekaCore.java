@@ -73,6 +73,7 @@ public class HekaCore
 	public static Item itemMalachite;
 	public static Block oreMalachite;
 	public static Block blockMalachite;
+	public static Item nuggetCopper;
 	public static Item ingotCopper;
 	public static Block oreCopper;
 	public static Block blockCopper;
@@ -148,6 +149,8 @@ public class HekaCore
     	GameRegistry.registerBlock(oreMalachite, "OreMalachite");
     	blockMalachite = new BlockMalachite(false);
     	GameRegistry.registerBlock(blockMalachite, "BlockMalachite");
+    	nuggetCopper = new NuggetCopper();
+    	GameRegistry.registerItem(nuggetCopper, "NuggetCopper");
     	ingotCopper = new IngotCopper();
     	GameRegistry.registerItem(ingotCopper, "IngotCopper");
     	oreCopper = new BlockCopper(true);
@@ -167,6 +170,7 @@ public class HekaCore
     {
     	//Forge doesn't have clay registered, despite being a vanilla item. Done here so that ScarabType can always pass strings.
     	OreDictionary.registerOre("clay", Items.clay_ball);
+    	OreDictionary.registerOre("nuggetCopper", nuggetCopper);
     	OreDictionary.registerOre("ingotCopper", ingotCopper);
     	OreDictionary.registerOre("oreCopper", oreCopper);
     }
@@ -208,6 +212,8 @@ public class HekaCore
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blockMalachite), "bbb", "bbb", "bbb", 'b', new ItemStack(itemMalachite)));
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(itemMalachite,9), "b", 'b', new ItemStack(blockMalachite)));
     	GameRegistry.addSmelting(new ItemStack(oreCopper), new ItemStack(ingotCopper), 0.5f);
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ingotCopper), "bbb", "bbb", "bbb", 'b', "nuggetCopper"));
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(nuggetCopper,9), "b", 'b', new ItemStack(ingotCopper)));
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blockCopper), "bbb", "bbb", "bbb", 'b', "ingotCopper"));
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ingotCopper,9), "b", 'b', new ItemStack(blockCopper)));
     }
