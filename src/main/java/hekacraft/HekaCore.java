@@ -81,6 +81,10 @@ public class HekaCore
 	public static Item seedsIncense;
 	public static Item fruitIncense;
 	public static Block plantIncense;
+	
+	public static Block blockStoneTable;
+	
+	public static Block[] stoneTableBlocks;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -114,6 +118,8 @@ public class HekaCore
     {
     	ClientRegistry.bindTileEntitySpecialRenderer(MageTableTileEntity.class, new MageTableRenderer());
     	GameRegistry.registerTileEntity(MageTableTileEntity.class, "mageTableTileEntity");
+    	
+    	GameRegistry.registerTileEntity(StoneTableTileEntity.class, "stoneTableTileEntity");
     }
     
     public void itemAndBlockRegistration()
@@ -164,6 +170,19 @@ public class HekaCore
     	GameRegistry.registerItem(fruitIncense, "FruitIncense");
     	seedsIncense = new SeedsIncense(plantIncense, Blocks.sand);
     	GameRegistry.registerItem(seedsIncense, "SeedsIncense");
+    	
+    	blockStoneTable = new BlockStoneTable();
+    	GameRegistry.registerBlock(blockStoneTable, "BlockStoneTable");
+    	
+    	stoneTableBlocks = new Block[15];
+    	String[] stoneTableBlockNames = {	"RedColumn","YellowColumn","GreenColumn","BlueColumn",
+											"BlackColumn","WhiteColumn","PlantColumn","DjedCapital",
+											"HathorCapital","LotusCapital","Stela","GrandStela"};
+    	for(int i=0;i<12;i++)
+    	{
+    		stoneTableBlocks[i] = new StoneTableBlock(i);
+    		GameRegistry.registerBlock(stoneTableBlocks[i], stoneTableBlockNames[i]);
+    	}
     }
     
     public void oreRegistration()
@@ -216,5 +235,7 @@ public class HekaCore
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(nuggetCopper,9), "b", 'b', new ItemStack(ingotCopper)));
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blockCopper), "bbb", "bbb", "bbb", 'b', "ingotCopper"));
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ingotCopper,9), "b", 'b', new ItemStack(blockCopper)));
+    	
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blockStoneTable), "bcp", "sss", "s s", 'b', new ItemStack(Items.bow,1,0), 'c', new ItemStack(chisel), 's', "stone", 'p', new ItemStack(palette), 's', "stone"));
     }
 }

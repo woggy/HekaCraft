@@ -14,6 +14,20 @@ item.diamondScarabNeck.name=Diamond Scarab Necklace
 item.itemMageTable.name=Magician's Worktable
 tile.blockMageTable.name=Magician's Worktable
 
+tile.blockStoneTable.name=Stonepainter's Workbench
+tile.redColumn.name=Red Painted Column
+tile.yellowColumn.name=Yellow Painted Column
+tile.greenColumn.name=Green Painted Column
+tile.blueColumn.name=Blue Painted Column
+tile.blackColumn.name=Black Painted Column
+tile.whiteColumn.name=White Painted Column
+tile.plantColumn.name=Greenery Column
+tile.djedCapital.name=Djed Capital
+tile.hathorCapital.name=Hathor Capital
+tile.lotusCapital.name=Lotus Capital
+tile.stela.name=Stela
+tile.grandStela.name=Grand Stela
+
 item.malachite.name=Malachite
 tile.malachiteOre.name=Malachite Ore
 tile.malachiteBlock.name=Block of Malachite

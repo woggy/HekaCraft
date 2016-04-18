@@ -2,13 +2,15 @@ package hekacraft;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class GuiHandler implements IGuiHandler 
 {
 	public static enum Types
 	{
-		MAGE_TABLE
+		MAGE_TABLE,
+		STONE_TABLE
 	}
 	
 	@Override
@@ -17,6 +19,12 @@ public class GuiHandler implements IGuiHandler
 		{
 			case MAGE_TABLE:
 				return new ContainerMageTable(player.inventory, world, x, y, z);
+			case STONE_TABLE:
+				TileEntity tileEntity = world.getTileEntity(x, y, z);
+				if(tileEntity instanceof StoneTableTileEntity)
+				{
+					return new ContainerStoneTable(player.inventory, (StoneTableTileEntity) tileEntity);
+				}
 			default:
 				return null;
 		}
@@ -28,6 +36,12 @@ public class GuiHandler implements IGuiHandler
 		{
 			case MAGE_TABLE:
 				return new GuiMageTable(player.inventory, world, x, y, z);
+			case STONE_TABLE:
+				TileEntity tileEntity = world.getTileEntity(x, y, z);
+				if(tileEntity instanceof StoneTableTileEntity)
+				{
+					return new GuiStoneTable(player.inventory, (StoneTableTileEntity) tileEntity);
+				}
 			default:
 				return null;
 		}
