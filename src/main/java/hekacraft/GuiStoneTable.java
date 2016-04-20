@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 public class GuiStoneTable extends GuiContainer 
 {
 	
-    private static final ResourceLocation textures = new ResourceLocation("hekacraft", "textures/gui/stoneTable.png");
+    private static final ResourceLocation textures = new ResourceLocation("hekacraft:textures/gui/stoneTable.png");
     private GuiButton currentlySelected;
     private StoneTableTileEntity tileEntity;
 
