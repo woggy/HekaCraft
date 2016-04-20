@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class MageTableModel extends ModelBase
+public class SunTableModel extends ModelBase
 {
   //fields
     ModelRenderer Tabletop;
@@ -18,7 +18,7 @@ public class MageTableModel extends ModelBase
     ModelRenderer ShortBar1;
     ModelRenderer ShortBar2;
   
-  public MageTableModel()
+  public SunTableModel()
   {
     textureWidth = 128;
     textureHeight = 64;

@@ -8,13 +8,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
-public class MageTableRenderer  extends TileEntitySpecialRenderer
+public class SunTableRenderer  extends TileEntitySpecialRenderer
 {
-	private final MageTableModel model;
+	private final SunTableModel model;
+	private String modelTexture;
 	
-	public MageTableRenderer()
+	public SunTableRenderer(String modelTexture)
 	{
-		this.model = new MageTableModel();
+		this.model = new SunTableModel();
+		this.modelTexture = modelTexture;
 	}
 	
 	@Override
@@ -25,7 +27,7 @@ public class MageTableRenderer  extends TileEntitySpecialRenderer
         //This is setting the initial location.
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
         //This is the texture of your block. It's pathed to be the same place as your other blocks here.
-        ResourceLocation textures = (new ResourceLocation("hekacraft:textures/blocks/hekacraft.block.mageTable.png")); 
+        ResourceLocation textures = (new ResourceLocation("hekacraft:textures/blocks/hekacraft.block." + modelTexture + ".png")); 
         //the ':' is very important
         //binding the textures
         Minecraft.getMinecraft().renderEngine.bindTexture(textures);

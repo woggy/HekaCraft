@@ -69,6 +69,10 @@ public class HekaCore
 	public static Item itemMageTable;
 	public static Block blockMageTable;
 	public static Block blockMageTableDummy;
+	
+	public static Item itemSunTable;
+	public static Block blockSunTable;
+	public static Block blockSunTableDummy;
 
 	public static Item itemMalachite;
 	public static Block oreMalachite;
@@ -116,7 +120,9 @@ public class HekaCore
     
     public void tileEntityRegistration()
     {
-    	ClientRegistry.bindTileEntitySpecialRenderer(MageTableTileEntity.class, new MageTableRenderer());
+    	ClientRegistry.bindTileEntitySpecialRenderer(SunTableTileEntity.class, new SunTableRenderer("sunTable"));
+    	GameRegistry.registerTileEntity(SunTableTileEntity.class, "sunTableTileEntity");
+    	ClientRegistry.bindTileEntitySpecialRenderer(MageTableTileEntity.class, new SunTableRenderer("mageTable"));
     	GameRegistry.registerTileEntity(MageTableTileEntity.class, "mageTableTileEntity");
     	
     	GameRegistry.registerTileEntity(StoneTableTileEntity.class, "stoneTableTileEntity");
@@ -142,12 +148,19 @@ public class HekaCore
     		GameRegistry.registerItem(scarabNeckHash.get(scarab.materialName), scarab.materialName+"ScarabNeck");
     	}
 
-    	itemMageTable = new ItemMageTable();
-    	GameRegistry.registerItem(itemMageTable, "ItemMageTable");
     	blockMageTable = new BlockMageTable();
     	GameRegistry.registerBlock(blockMageTable, "BlockMageTable");
     	blockMageTableDummy = new BlockMageTableDummy();
     	GameRegistry.registerBlock(blockMageTableDummy, "BlockMageTableDummy");
+    	itemMageTable = new ItemMageTable();
+    	GameRegistry.registerItem(itemMageTable, "ItemMageTable");
+
+    	blockSunTable = new BlockSunTable();
+    	GameRegistry.registerBlock(blockSunTable, "BlockSunTable");
+    	blockSunTableDummy = new BlockSunTableDummy();
+    	GameRegistry.registerBlock(blockSunTableDummy, "BlockSunTableDummy");
+    	itemSunTable = new ItemSunTable();
+    	GameRegistry.registerItem(itemSunTable, "ItemSunTable");
     	
     	itemMalachite = new ItemMalachite();
     	GameRegistry.registerItem(itemMalachite, "ItemMalachite");
@@ -216,16 +229,30 @@ public class HekaCore
 
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(chisel), "x ", " y", 'x', "ingotIron", 'y', "stickWood"));
     	
-    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(itemMageTable), "fbp", "www", 
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(itemSunTable), "nln", "sss", "p p",
+    													'n', "nuggetGold",
+    													'l', "dyeBlue",
+    													's', "slabWood",
+    													'p', "plankWood"));
+    	
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(itemMageTable), "fbp", " t ", 
     													'f', new ItemStack(pesheskef),
     													'b', new ItemStack(Items.bowl),
     													'p', new ItemStack(palette),
-    													'w', "plankWood"));
+    													't', new ItemStack(itemSunTable)));
     	
     	for (ScarabType scarab : ScarabType.values())
     	{
-    		MageTableCraftingManager.getInstance().addRecipe(new ShapedOreRecipe(new ItemStack(scarabHash.get(scarab.materialName)), " n ", "ece", "e e", 'n', "nuggetGold", 'e', scarab.edgeItem, 'c', scarab.centerItem));
-    		MageTableCraftingManager.getInstance().addRecipe(new ShapedOreRecipe(new ItemStack(scarabNeckHash.get(scarab.materialName)), "xyx", "y y", "xyx", 'x', new ItemStack(scarabHash.get(scarab.materialName)), 'y', new ItemStack(Items.string)));
+    		MageTableCraftingManager.getInstance().addRecipe(new ShapedOreRecipe(
+    												new ItemStack(scarabHash.get(scarab.materialName)), " n ", "ece", "e e",
+    													'n', "nuggetGold", 
+    													'e', scarab.edgeItem,
+    													'c', scarab.centerItem));
+    		
+    		MageTableCraftingManager.getInstance().addRecipe(new ShapedOreRecipe(
+    												new ItemStack(scarabNeckHash.get(scarab.materialName)), "xyx", "y y", "xyx",
+    													'x', new ItemStack(scarabHash.get(scarab.materialName)),
+    													'y', new ItemStack(Items.string)));
     	}
     	
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blockMalachite), "bbb", "bbb", "bbb", 'b', new ItemStack(itemMalachite)));
@@ -236,6 +263,10 @@ public class HekaCore
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blockCopper), "bbb", "bbb", "bbb", 'b', "ingotCopper"));
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ingotCopper,9), "b", 'b', new ItemStack(blockCopper)));
     	
-    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blockStoneTable), "bcp", "sss", "s s", 'b', new ItemStack(Items.bow,1,0), 'c', new ItemStack(chisel), 's', "stone", 'p', new ItemStack(palette), 's', "stone"));
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blockStoneTable), "bcp", "sss", "s s",
+    													'b', new ItemStack(Items.bow,1,0), 
+    													'c', new ItemStack(chisel), 
+    													's', "stone", 
+    													'p', new ItemStack(palette)));
     }
 }
