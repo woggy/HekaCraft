@@ -9,12 +9,12 @@ public class NEIHekaCraftConfig implements IConfigureNEI
 {
 	public String getName()
 	{
-		return "HekaCraft";
+		return HekaCore.MODNAME;
 	}
 
 	public String getVersion()
 	{
-		return "0.1";
+		return HekaCore.VERSION;
 	}
 
 	public void loadConfig()
