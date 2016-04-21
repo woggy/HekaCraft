@@ -10,10 +10,12 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -89,6 +91,9 @@ public class HekaCore
 	public static Block blockStoneTable;
 	
 	public static Block[] stoneTableBlocks;
+
+	public static ToolMaterial COPPER;
+	public static Item ritualKnife;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -196,6 +201,11 @@ public class HekaCore
     		stoneTableBlocks[i] = new StoneTableBlock(i);
     		GameRegistry.registerBlock(stoneTableBlocks[i], stoneTableBlockNames[i]);
     	}
+    	
+    	COPPER = EnumHelper.addToolMaterial("COPPER", 1, 160, 5.0F, 1.0F, 20);
+    	COPPER.setRepairItem(new ItemStack(ingotCopper));
+    	ritualKnife = new RitualKnife(COPPER);
+    	GameRegistry.registerItem(ritualKnife, "RitualKnife");
     }
     
     public void oreRegistration()
@@ -268,5 +278,9 @@ public class HekaCore
     													'c', new ItemStack(chisel), 
     													's', "stone", 
     													'p', new ItemStack(palette)));
+    	
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ritualKnife), "c", "c", "s",
+    													'c', "ingotCopper",
+    													's', "stickWood"));
     }
 }
