@@ -10,6 +10,25 @@ import net.minecraft.item.ItemStack;
 
 public class SlotStoneTable extends Slot
 {	
+	public static ItemStack[] pigments = { 	new ItemStack(Item.getItemFromBlock(Blocks.stained_hardened_clay),1,14),
+											new ItemStack(Item.getItemFromBlock(Blocks.stained_hardened_clay),1,4),
+											new ItemStack(HekaCore.itemMalachite),
+											new ItemStack(Items.dye,1,4),
+											new ItemStack(Items.coal),
+											new ItemStack(Items.coal,1,1),
+											new ItemStack(Items.egg),
+											new ItemStack(Items.dye,1,15)};
+	
+	//								color + (amount << mask)
+	public static int[] amounts = { 0 + (16 << 3),
+									1 + (16 << 3),
+									2 + (8 << 3),
+									3 + (8 << 3),
+									4 + (6 << 3),
+									4 + (6 << 3),
+									5 + (2 << 3),
+									5 + (6 << 3)};
+	
 	public SlotStoneTable(IInventory inventory, int index, int x, int y)
 	{
 		super(inventory, index, x, y);
@@ -76,7 +95,7 @@ public class SlotStoneTable extends Slot
         	inv.decrStackSize(1, 1);
 			for(int i=0;i<6;i++)
 			{
-    			inv.setInkLevel(i,inv.getInkLevel(i)-inv.inkRatios[inv.getCraft()][i]);
+    			inv.setInkLevel(i,inv.getInkLevel(i)-StoneTableTileEntity.inkRatios[inv.getCraft()][i]);
 			}
     	}
         this.onSlotChanged();
@@ -86,20 +105,13 @@ public class SlotStoneTable extends Slot
     {
     	if(item == null)
     		return -1;
-    	if((item.getItem() == Item.getItemFromBlock(Blocks.stained_hardened_clay)) && (item.getItemDamage() == 14))
-    		return 0 + (16 << 3);
-    	if((item.getItem() == Item.getItemFromBlock(Blocks.stained_hardened_clay)) && (item.getItemDamage() == 4))
-    		return 1 + (16 << 3);
-    	if(item.getItem() == HekaCore.itemMalachite)
-    		return 2 + (8 << 3);
-    	if((item.getItem() == Items.dye) && (item.getItemDamage() == 4))
-    		return 3 + (8 << 3);
-    	if(item.getItem() == Items.coal)
-    		return 4 + (6 << 3);
-    	if(item.getItem() == Items.egg)
-    		return 5 + (2 << 3);
-    	if((item.getItem() == Items.dye) && (item.getItemDamage() == 15))
-    		return 5 + (6 << 3);
+    	for (int i=0; i<SlotStoneTable.pigments.length;i++)
+    	{
+    		if(item.isItemEqual(SlotStoneTable.pigments[i]))
+    		{
+    			return amounts[i];
+    		}
+    	};
     	return -1;
     }
 }

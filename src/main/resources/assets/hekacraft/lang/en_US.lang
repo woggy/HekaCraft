@@ -31,6 +31,13 @@ tile.lotusCapital.name=Lotus Capital
 tile.stela.name=Stela
 tile.grandStela.name=Grand Stela
 
+item.pigment.red.name=Red Pigment
+item.pigment.yellow.name=Yellow Pigment
+item.pigment.green.name=Green Pigment
+item.pigment.blue.name=Blue Pigment
+item.pigment.black.name=Black Pigment
+item.pigment.white.name=White Pigment
+
 item.malachite.name=Malachite
 tile.malachiteOre.name=Malachite Ore
 tile.malachiteBlock.name=Block of Malachite

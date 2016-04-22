@@ -15,9 +15,9 @@ public class StoneTableTileEntity extends TileEntity implements IInventory
 	private ItemStack[] contents = new ItemStack[3];
 	private int craft = -1;
 	private int[] inkReserves = new int[6];
-	public int[][] inkRatios = {{16,0,0,0,0,0},{0,16,0,0,0,0},{0,0,16,0,0,0},{0,0,0,16,0,0},
-								{0,0,0,0,16,0},{0,0,0,0,0,16},{0,0,12,0,2,2},{4,4,0,4,4,0},
-								{4,4,4,0,4,0}, {0,8,0,8,0,0}, {2,1,1,1,2,1}, {2,1,1,1,2,1}};
+	public static int[][] inkRatios = {{16,0,0,0,0,0},{0,16,0,0,0,0},{0,0,16,0,0,0},{0,0,0,16,0,0},
+									   {0,0,0,0,16,0},{0,0,0,0,0,16},{0,0,12,0,2,2},{4,4,0,4,4,0},
+									   {4,4,4,0,4,0}, {0,8,0,8,0,0}, {2,1,1,1,2,1}, {2,1,1,1,2,1}};
 	
 	@Override
 	public int getSizeInventory()

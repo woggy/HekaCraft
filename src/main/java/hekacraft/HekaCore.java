@@ -89,8 +89,8 @@ public class HekaCore
 	public static Block plantIncense;
 	
 	public static Block blockStoneTable;
-	
 	public static Block[] stoneTableBlocks;
+	public static Item pigment;
 
 	public static ToolMaterial COPPER;
 	public static Item ritualKnife;
@@ -191,7 +191,6 @@ public class HekaCore
     	
     	blockStoneTable = new BlockStoneTable();
     	GameRegistry.registerBlock(blockStoneTable, "BlockStoneTable");
-    	
     	stoneTableBlocks = new Block[15];
     	String[] stoneTableBlockNames = {	"RedColumn","YellowColumn","GreenColumn","BlueColumn",
 											"BlackColumn","WhiteColumn","PlantColumn","DjedCapital",
@@ -201,6 +200,9 @@ public class HekaCore
     		stoneTableBlocks[i] = new StoneTableBlock(i);
     		GameRegistry.registerBlock(stoneTableBlocks[i], stoneTableBlockNames[i]);
     	}
+    	pigment = new Pigment();
+    	GameRegistry.registerItem(pigment, "Pigment");
+    	
     	
     	COPPER = EnumHelper.addToolMaterial("COPPER", 1, 160, 5.0F, 1.0F, 20);
     	COPPER.setRepairItem(new ItemStack(ingotCopper));

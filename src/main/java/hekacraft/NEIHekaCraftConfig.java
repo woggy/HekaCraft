@@ -25,6 +25,10 @@ public class NEIHekaCraftConfig implements IConfigureNEI
 		
 		API.registerGuiOverlay(GuiMageTable.class, "mageTable");
 		API.registerGuiOverlayHandler(GuiMageTable.class, new DefaultOverlayHandler(), "mageTable");
+		
+		StoneTableRecipeHandler stoneTable = new StoneTableRecipeHandler();
+		API.registerRecipeHandler(stoneTable);
+		API.registerUsageHandler(stoneTable);
 
 		API.hideItem(new ItemStack(HekaCore.blockMageTable));
 		API.hideItem(new ItemStack(HekaCore.blockSunTable));

@@ -1,5 +1,7 @@
 package hekacraft;
 
+import java.awt.Rectangle;
+
 import codechicken.nei.NEIServerUtils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
@@ -35,9 +37,14 @@ public class MageTableRecipeHandler extends codechicken.nei.recipe.ShapedRecipeH
         return StatCollector.translateToLocal("tile.blockMageTable.name");
     }
 	
+    public void loadTransferRects()
+    {
+    	transferRects.add(new RecipeTransferRect(new Rectangle(84,23,24,18), "mageTable"));
+    }
+	
     @Override
     public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals("crafting") && getClass() == MageTableRecipeHandler.class) {
+        if (outputId.equals("mageTable") && getClass() == MageTableRecipeHandler.class) {
             for (IRecipe irecipe : MageTableCraftingManager.getInstance().getRecipeList()) {
                 CachedShapedRecipe recipe = null;
                 if (irecipe instanceof ShapedRecipes)
@@ -77,7 +84,6 @@ public class MageTableRecipeHandler extends codechicken.nei.recipe.ShapedRecipeH
 
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
-    	System.out.println("loadUsageRecipes");
         for (IRecipe irecipe : MageTableCraftingManager.getInstance().getRecipeList()) {
             CachedShapedRecipe recipe = null;
             if (irecipe instanceof ShapedRecipes)
