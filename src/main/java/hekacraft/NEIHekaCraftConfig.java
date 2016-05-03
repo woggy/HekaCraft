@@ -34,6 +34,7 @@ public class NEIHekaCraftConfig implements IConfigureNEI
 		API.hideItem(new ItemStack(HekaCore.blockSunTable));
 		API.hideItem(new ItemStack(HekaCore.blockMageTableDummy));
 		API.hideItem(new ItemStack(HekaCore.blockSunTableDummy));
+		API.hideItem(new ItemStack(HekaCore.stelaDummy));
 	}
 
 }

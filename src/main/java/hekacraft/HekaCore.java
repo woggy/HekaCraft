@@ -92,6 +92,8 @@ public class HekaCore
 	public static Block[] stoneTableBlocks;
 	public static Item pigment;
 
+	public static Block stelaDummy;
+
 	public static ToolMaterial COPPER;
 	public static Item ritualKnife;
 
@@ -131,6 +133,11 @@ public class HekaCore
     	GameRegistry.registerTileEntity(MageTableTileEntity.class, "mageTableTileEntity");
     	
     	GameRegistry.registerTileEntity(StoneTableTileEntity.class, "stoneTableTileEntity");
+
+    	ClientRegistry.bindTileEntitySpecialRenderer(StelaTileEntity.class, new StelaRenderer("stela"));
+    	GameRegistry.registerTileEntity(StelaTileEntity.class, "stela");
+    	ClientRegistry.bindTileEntitySpecialRenderer(GrandStelaTileEntity.class, new GrandStelaRenderer("grandStela"));
+    	GameRegistry.registerTileEntity(GrandStelaTileEntity.class, "grandStela");
     }
     
     public void itemAndBlockRegistration()
@@ -195,13 +202,22 @@ public class HekaCore
     	String[] stoneTableBlockNames = {	"RedColumn","YellowColumn","GreenColumn","BlueColumn",
 											"BlackColumn","WhiteColumn","PlantColumn","DjedCapital",
 											"HathorCapital","LotusCapital","Stela","GrandStela"};
-    	for(int i=0;i<12;i++)
+    	for(int i=0;i<10;i++)
     	{
     		stoneTableBlocks[i] = new StoneTableBlock(i);
     		GameRegistry.registerBlock(stoneTableBlocks[i], stoneTableBlockNames[i]);
     	}
+    	for(int i=10;i<12;i++)
+    	{
+    		stoneTableBlocks[i] = new Stela(i);
+    		GameRegistry.registerBlock(stoneTableBlocks[i], stoneTableBlockNames[i]);
+    	}
+    	
     	pigment = new Pigment();
     	GameRegistry.registerItem(pigment, "Pigment");
+    	
+    	stelaDummy = new StelaDummy();
+    	GameRegistry.registerBlock(stelaDummy, "StelaDummy");
     	
     	
     	COPPER = EnumHelper.addToolMaterial("COPPER", 1, 160, 5.0F, 1.0F, 20);
