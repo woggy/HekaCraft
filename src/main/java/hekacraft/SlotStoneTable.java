@@ -67,7 +67,6 @@ public class SlotStoneTable extends Slot
 			{
 				int pigmentDensity = color >> 3;
 				color &= 7;
-				System.out.println("Color: " + color + " Density: " + pigmentDensity);
 				int currentLevel = inv.getInkLevel(color);
 				if((currentLevel + items.stackSize * pigmentDensity) <= 1024)
 				{
