@@ -14,7 +14,7 @@ public class BlockMageTableDummy extends BlockSunTableDummy
 	{
 		super();
 		this.setBlockName("mageTable");
-		this.setBlockTextureName("hekacraft:hekacraft.block.mageTable.item");
+		this.setBlockTextureName("hekacraft:hekacraft.block.mageTable.break");
 	}    
 	
 	/**

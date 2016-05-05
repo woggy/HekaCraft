@@ -17,7 +17,7 @@ public class StelaDummy extends Block
 	{
 		super(Material.rock);
 		this.setBlockName("stelaDummy");
-		this.setBlockTextureName("hekacraft:hekacraft.block.grandStela.item");
+		this.setBlockTextureName("hekacraft:hekacraft.block.grandStela.break");
 		this.setHardness(1.5F);
 		this.setResistance(5.0F);
 		this.setStepSound(soundTypePiston);

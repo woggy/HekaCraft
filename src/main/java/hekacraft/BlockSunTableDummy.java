@@ -18,7 +18,7 @@ public class BlockSunTableDummy extends Block
 		this.setHardness(2.5F);
 		this.setStepSound(soundTypeWood);
 		this.setBlockName("sunTable");
-		this.setBlockTextureName("hekacraft:hekacraft.block.sunTable.item");
+		this.setBlockTextureName("hekacraft:hekacraft.block.sunTable.break");
 	}    
 	
 	//This method checks if other block exists. 
