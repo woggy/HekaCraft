@@ -49,6 +49,8 @@ public class HekaCore
     public static Item goldPesheskef;
     public static Item palette;
     public static Item chisel;
+    public static Item mageWand;
+    
 	public static HashMap<String, Scarab> scarabHash;
 	public static HashMap<String, ScarabNeck> scarabNeckHash;
 	public enum ScarabType
@@ -153,6 +155,8 @@ public class HekaCore
     	GameRegistry.registerItem(palette, "ScribePalette");
     	chisel = new Chisel();
     	GameRegistry.registerItem(chisel, "Chisel");
+    	mageWand = new MageWand();
+    	GameRegistry.registerItem(mageWand, "MageWand");
     	
 
     	scarabHash = new HashMap<String, Scarab>();
@@ -235,8 +239,8 @@ public class HekaCore
     	ritualKnife = new RitualKnife(COPPER);
     	GameRegistry.registerItem(ritualKnife, "RitualKnife");
     }
-    
-    public void oreRegistration()
+
+	public void oreRegistration()
     {
     	//Forge doesn't have clay registered, despite being a vanilla item. Done here so that ScarabType can always pass strings.
     	OreDictionary.registerOre("clay", Items.clay_ball);
@@ -271,13 +275,22 @@ public class HekaCore
 
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(chisel), "x ", " y", 'x', "ingotIron", 'y', "stickWood"));
     	
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(mageWand), "  g", "p p", " pm",
+    													'g', "nuggetGold",
+    													'p', "plankWood",
+    													'm', new ItemStack(itemMalachite)));
+    	
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(itemSunTable), "nln", "sss", "p p",
     													'n', "nuggetGold",
     													'l', "dyeBlue",
     													's', "slabWood",
     													'p', "plankWood"));
     	
-    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(itemMageTable), "fbp", " t ", 
+    	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(itemMageTable), "fwm", "ktc", "b p", 
+    													'w', new ItemStack(Blocks.wool,1,0),
+    													'm', new ItemStack(mageWand),
+    													'k', new ItemStack(ritualKnife),
+    													'c', new ItemStack(Items.reeds),
     													'f', new ItemStack(pesheskef),
     													'b', new ItemStack(Items.bowl),
     													'p', new ItemStack(palette),
