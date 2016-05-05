@@ -1,5 +1,7 @@
 package hekacraft;
 
+import java.util.Random;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -8,6 +10,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -21,6 +24,7 @@ public class Stela extends StoneTableBlock implements ITileEntityProvider
 	public Stela(int i)
 	{
 		super(i);
+		this.setCreativeTab(null);
 		this.setBlockTextureName(this.getTextureName()+".item");
 		//If the numbering changes, this will have to as well.
 		grand = (i == 11);
@@ -135,4 +139,13 @@ public class Stela extends StoneTableBlock implements ITileEntityProvider
     		}
     	}
     }
+	
+	@Override
+	public Item getItemDropped(int meta, Random random, int fortune)
+	{
+		if(this.grand)
+			return HekaCore.itemGrandStela;
+		else
+			return HekaCore.itemStela;
+	}
 }

@@ -227,7 +227,12 @@ public class StoneTableTileEntity extends TileEntity implements IInventory
     				flag = false;
     		}
     		if(flag)
-    			this.setInventorySlotContents(2, new ItemStack(HekaCore.stoneTableBlocks[craft]));
+    			if(craft == 10)
+        			this.setInventorySlotContents(2, new ItemStack(HekaCore.itemStela));
+    			else if (craft == 11)
+        			this.setInventorySlotContents(2, new ItemStack(HekaCore.itemGrandStela));
+    			else
+    				this.setInventorySlotContents(2, new ItemStack(HekaCore.stoneTableBlocks[craft]));
     		else
     			this.setInventorySlotContents(2, null);
     	}

@@ -31,6 +31,9 @@ tile.lotusCapital.name=Lotus Capital
 tile.stela.name=Stela
 tile.grandStela.name=Grand Stela
 
+item.stela.name=Stela
+item.grandStela.name=Grand Stela
+
 item.pigment.red.name=Red Pigment
 item.pigment.yellow.name=Yellow Pigment
 item.pigment.green.name=Green Pigment

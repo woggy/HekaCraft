@@ -92,6 +92,8 @@ public class HekaCore
 	public static Block[] stoneTableBlocks;
 	public static Item pigment;
 
+	public static Item itemStela;
+	public static Item itemGrandStela;
 	public static Block stelaDummy;
 
 	public static ToolMaterial COPPER;
@@ -216,6 +218,11 @@ public class HekaCore
     	pigment = new Pigment();
     	GameRegistry.registerItem(pigment, "Pigment");
     	
+    	
+    	itemStela = new ItemStela(false);
+    	GameRegistry.registerItem(itemStela, "ItemStela");
+    	itemGrandStela = new ItemStela(true);
+    	GameRegistry.registerItem(itemGrandStela, "ItemGrandStela");
     	stelaDummy = new StelaDummy();
     	GameRegistry.registerBlock(stelaDummy, "StelaDummy");
     	

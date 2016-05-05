@@ -47,8 +47,7 @@ public class StelaDummy extends Block
 	
 	public Item getItemDropped(int meta, Random foo, int bar)
 	{
-		//hardcoded to drop the Grand Stela. Ugly, but functional.
-		return Item.getItemFromBlock(HekaCore.stoneTableBlocks[11]);
+		return HekaCore.itemGrandStela;
 	}
 
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float playerX, float playerY, float playerZ)

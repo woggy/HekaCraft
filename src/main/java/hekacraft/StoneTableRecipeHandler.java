@@ -85,8 +85,13 @@ public class StoneTableRecipeHandler extends codechicken.nei.recipe.ShapedRecipe
 					ingredients[5+2*k+1] = new ItemStack(HekaCore.pigment,pigments[j],j);
 					k++;
 				}
-						
-			recipes.add(new ShapedOreRecipe(new ItemStack(HekaCore.stoneTableBlocks[i]), ingredients));
+			
+			if(i==10)
+				recipes.add(new ShapedOreRecipe(new ItemStack(HekaCore.itemStela), ingredients));
+			else if(i==11)
+				recipes.add(new ShapedOreRecipe(new ItemStack(HekaCore.itemGrandStela), ingredients));
+			else
+				recipes.add(new ShapedOreRecipe(new ItemStack(HekaCore.stoneTableBlocks[i]), ingredients));
 		}
 	}
 	
@@ -128,6 +133,16 @@ public class StoneTableRecipeHandler extends codechicken.nei.recipe.ShapedRecipe
     	int blockIndex = -1;
     	for(int i=0;i<HekaCore.stoneTableBlocks.length;i++)
     	{
+    		if(output.contains(HekaCore.itemStela))
+    		{
+    			blockIndex=10;
+    			break;
+    		}
+    		if(output.contains(HekaCore.itemGrandStela))
+    		{
+    			blockIndex=11;
+    			break;
+    		}
     		if(output.contains(Item.getItemFromBlock(HekaCore.stoneTableBlocks[i])))
     		{
     			blockIndex=i;
