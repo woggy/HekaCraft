@@ -46,6 +46,7 @@ public class HekaCore
     TerrainEventHandler decorateIncense = new TerrainEventHandler();
     
     public static Item pesheskef;
+    public static Item goldPesheskef;
     public static Item palette;
     public static Item chisel;
 	public static HashMap<String, Scarab> scarabHash;
@@ -146,6 +147,8 @@ public class HekaCore
     {
     	pesheskef = new Pesheskef();
     	GameRegistry.registerItem(pesheskef, "Pesheskef");
+    	goldPesheskef = new GoldPesheskef();
+    	GameRegistry.registerItem(goldPesheskef, "GoldPesheskef");
     	palette = new Palette();
     	GameRegistry.registerItem(palette, "ScribePalette");
     	chisel = new Chisel();
@@ -251,6 +254,10 @@ public class HekaCore
     public void addRecipes()
     {
     	GameRegistry.addRecipe(new ItemStack(pesheskef), "fff", " f ", 'f', new ItemStack(Items.flint));
+    	MageTableCraftingManager.getInstance().addRecipe(new ShapedOreRecipe(new ItemStack(goldPesheskef), "ggg", "gpg", "mgm",
+    													'g', "nuggetGold",
+    													'p', new ItemStack(pesheskef,1,0),
+    													'm', new ItemStack(itemMalachite)));
     	
     	//Wildcard usage allows this to pick up both coal and charcoal.
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(palette), "xrw", "ccc", "ygl",

@@ -1,7 +1,6 @@
 package hekacraft;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
@@ -135,24 +134,29 @@ public class CropIncense extends Block implements IShearable
     {
     	if(item != null)
     	{
+    		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
     		if(world.getBlockMetadata(x, y, z) != 4)
     		{
-    			return new ArrayList<ItemStack>(Arrays.asList(new ItemStack(HekaCore.seedsIncense)));
+    			ret.add(new ItemStack(HekaCore.seedsIncense));
     		}
     		else 
     		{
-    			if(item.getItem() instanceof Pesheskef)
-	    		{
-	    			//Base Pesheskef
-	        		return new ArrayList<ItemStack>(Arrays.asList(new ItemStack(HekaCore.fruitIncense)));
-	    		}
-	    		else
+    			if(item.getItem() instanceof GoldPesheskef)
+    			{
+    				//Golden Pesheskef
+    				Random rand = new Random();
+    				if (rand.nextInt(5) == 0)
+    					ret.add(new ItemStack(HekaCore.seedsIncense));
+    			}
+    			if(!(item.getItem() instanceof Pesheskef))
 	    		{
 	    			//Vanilla shears, or another mod's that inherits
 	        		((World) world).setBlockToAir(x,y,z);
-	        		return new ArrayList<ItemStack>(Arrays.asList(new ItemStack(HekaCore.fruitIncense)));
 	    		}
+    			//Regardless of what you sheared it with, get some tasty!
+        		ret.add(new ItemStack(HekaCore.fruitIncense));
     		}
+    		return ret;
     	}
     	//Default 
     	return null;
