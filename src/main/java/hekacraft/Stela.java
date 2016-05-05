@@ -25,7 +25,7 @@ public class Stela extends StoneTableBlock implements ITileEntityProvider
 	{
 		super(i);
 		this.setCreativeTab(null);
-		this.setBlockTextureName(this.getTextureName()+".item");
+		this.setBlockTextureName(this.getTextureName()+".break");
 		//If the numbering changes, this will have to as well.
 		grand = (i == 11);
 	}

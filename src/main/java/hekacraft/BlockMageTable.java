@@ -14,7 +14,7 @@ public class BlockMageTable extends BlockSunTable implements ITileEntityProvider
 	{
 		super();
 		this.setBlockName("blockMageTable");
-		this.setBlockTextureName("hekacraft:hekacraft.block.mageTable.item");		
+		this.setBlockTextureName("hekacraft:hekacraft.block.mageTable.break");		
 	}
 	
 	public TileEntity createNewTileEntity(World world, int meta)

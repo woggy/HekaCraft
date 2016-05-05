@@ -23,7 +23,7 @@ public class BlockSunTable extends Block implements ITileEntityProvider
 		this.setHardness(2.5F);
 		this.setStepSound(soundTypeWood);
 		this.setBlockName("blockSunTable");
-		this.setBlockTextureName("hekacraft:hekacraft.block.sunTable.item");		
+		this.setBlockTextureName("hekacraft:hekacraft.block.sunTable.break");		
 	}
 	
 	public TileEntity createNewTileEntity(World world, int meta)
