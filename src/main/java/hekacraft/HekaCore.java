@@ -42,7 +42,7 @@ public class HekaCore
     	}
     };
     
-    ArmorEventHandler soakDamage = new ArmorEventHandler();
+    TrinketEventHandler trinketEvents = new TrinketEventHandler();
     TerrainEventHandler decorateIncense = new TerrainEventHandler();
     
     public static Item pesheskef;
@@ -70,6 +70,8 @@ public class HekaCore
 			this.centerItem = centerItem;
 		}
 	}
+	
+	public static Item wesekhNeck;
 	
 	public static Item itemMageTable;
 	public static Block blockMageTable;
@@ -125,7 +127,7 @@ public class HekaCore
     
     public void eventAndGuiRegistration()
     {
-    	MinecraftForge.EVENT_BUS.register(soakDamage);
+    	MinecraftForge.EVENT_BUS.register(trinketEvents);
     	MinecraftForge.EVENT_BUS.register(decorateIncense);
     	NetworkRegistry.INSTANCE.registerGuiHandler(HekaCore.instance, new GuiHandler());
     }
@@ -168,6 +170,9 @@ public class HekaCore
     		GameRegistry.registerItem(scarabHash.get(scarab.materialName),scarab.materialName+"Scarab");
     		GameRegistry.registerItem(scarabNeckHash.get(scarab.materialName), scarab.materialName+"ScarabNeck");
     	}
+    	
+    	wesekhNeck = new WesekhNeck();
+    	GameRegistry.registerItem(wesekhNeck, "WesekhNeck");
 
     	blockMageTable = new BlockMageTable();
     	GameRegistry.registerBlock(blockMageTable, "BlockMageTable");
@@ -309,6 +314,12 @@ public class HekaCore
     													'x', new ItemStack(scarabHash.get(scarab.materialName)),
     													'y', new ItemStack(Items.string)));
     	}
+    	
+    	//Placeholder recipe
+    	MageTableCraftingManager.getInstance().addRecipe(new ShapedOreRecipe(
+    												new ItemStack(wesekhNeck), "s s", "g g", "ggg",
+    													's', new ItemStack(scarabHash.get(ScarabType.DIAMOND.materialName)),
+    													'g', "ingotGold"));
     	
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blockMalachite), "bbb", "bbb", "bbb", 'b', new ItemStack(itemMalachite)));
     	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(itemMalachite,9), "b", 'b', new ItemStack(blockMalachite)));

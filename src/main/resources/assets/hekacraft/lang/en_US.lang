@@ -14,6 +14,8 @@ item.lapisScarabNeck.name=Lapis Scarab Necklace
 item.emeraldScarabNeck.name=Emerald Scarab Necklace
 item.diamondScarabNeck.name=Diamond Scarab Necklace
 
+item.wesekhNeck.name=Wesekh Collar
+
 item.itemSunTable.name=Sun Table
 tile.blockSunTable.name=Sun Table
 item.itemMageTable.name=Magician's Worktable
